@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> This repository is under active development. This notice will be removed once it's at a "v1" stage.
+
 # dkls
 
 This repository contains an implementation of [dkls18](https://eprint.iacr.org/2018/499), a multi-party protocol to compute ECDSA signatures.
