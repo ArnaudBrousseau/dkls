@@ -1,0 +1,36 @@
+{
+  "name": "dkls",
+  "version": "0.0.1",
+  "description": "Implementation of the Multi-Party Computation (MPC) protocol descripted in dkls18",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+      "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b ./tsconfig.json ./tsconfig.esm.json",
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnaudBrousseau/dkls.git"
+  },
+  "keywords": [
+    "cryptography",
+    "dkls",
+    "mpc",
+    "typescript",
+    "protocol"
+  ],
+  "author": "Arnaud Brousseau",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ArnaudBrousseau/dkls/issues"
+  },
+  "homepage": "https://github.com/ArnaudBrousseau/dkls",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
