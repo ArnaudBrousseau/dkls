@@ -4,11 +4,21 @@ This repository contains an implementation of [dkls18](https://eprint.iacr.org/2
 
 ## Installing
 
-TODO
+```
+npm install
+```
 
 ## Running tests
 
-TODO
+```
+npm test
+```
+
+## Building
+
+```
+npm run build
+```
 
 ## Motivations
 
