@@ -56,7 +56,7 @@ Reminder: an ECDSA signature is computed with the following steps:
 
 To compute a new ECDSA signature, two private inputs are needed: $k$ (the nonce) and $d$ (the secret key), and _neither party can know their value_. So: how do we compute a signature? With **private shares of these inputs**. More specifically: multiplicative shares and additive shares. From now on we'll refer to the two parties as "Alice" and "Bob". The protocol has three main phases.
 
-### Generate multiplicative shares of $k$ (nonce) and $s$ (secret key)
+### Generate multiplicative shares of nonce and secret key
 
 In this phase the protocol generates multiplicative shares. Alice generates $(k_a, s_a)$ and Bob generates $(k_b, s_b)$ such that $k_ak_b = k$ and $s_as_b = d$. And of course, neither of them know the full $k$ or $d$.
 
@@ -77,18 +77,17 @@ Now Alice and Bob use MtA with inputs $s_ak_a^{-1}$ and $s_bk_b^{-1}$, to obtain
 ### Compute the signature shares
 
 Now Alice and Bob can finally compute a signature, they have all the elements:
-* Alice computes $sig_a = H*k_{inva} + r*t_{sk_a}$
-* Bob computes $sig_b = H*k_{invb} + r*t_{sk_b}$
+* Alice computes $sig_a = H * k_{inva} + r * t_{sk_a}$
+* Bob computes $sig_b = H * k_{invb} + r * t_{sk_b}$
 
 Note that these are additive shares of the $s$ component of our actual signature:
 
-$ sig_a + sig_b
-\\= H*k_{inva} + r*t_{sk_a} + H*k_{invb} + r*t_{sk_b}
-\\= H*(k_{inva}+k_{invb}) + r*(t_{sk_a} + t_{sk_b})
-\\= H*k^{-1} + r*sk^{-1}
-\\= k^{-1}*(H + r*s)
-\\ = s \qquad \blacksquare
-$
+$sig_a + sig_b$  
+$= H * k_{inva} + r * t_{sk_a} + H * k_{invb} + r * t_{sk_b}$  
+$= H * (k_{inva}+k_{invb}) + r*(t_{sk_a} + t_{sk_b})$  
+$= H * k^{-1} + r * sk^{-1}$  
+$= k^{-1} * (H + r * s)$  
+$= s \qquad \blacksquare$
 
 $r$ was already computed in phase 1, so we're done! We have successfully computed $(r, s)$.
 
@@ -113,7 +112,7 @@ To obtain a MtA protocol from cOT, we need to leverage an important idea: [long 
 
 Observe how long multiplication plays out:
 
-![Long Multiplication: 50 * 37 = 1850](./img/long_multiplication.png)
+<img src="./img/long_multiplication.png" width=500 alt="Long Multiplication: 50 * 37 = 1850"/>
 
 To transform their multiplicative shares (0b110010 or 50, 0b100101 or 37) into two additive shares, Alice and Bob will run cOT 6 times:
 * the first cOT takes 110010 (Alice's share) and Bob's share's right-most bit (1). The output will be 2 new random additive shares such that $t_{a_1}+t_{b_1} = 110010$.
