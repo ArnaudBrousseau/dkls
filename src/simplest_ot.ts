@@ -18,10 +18,14 @@ export class OTSender {
     #message0: Uint8Array;
     #message1: Uint8Array;
 
-    constructor(privateKey: Uint8Array | null, message0: Uint8Array, message1: Uint8Array) {
-        this.#privateKey = privateKey || secp256k1.utils.randomPrivateKey();
-        this.#message0 = message0;
-        this.#message1 = message1;
+    constructor(config: {
+        privateKey: Uint8Array | undefined,
+        message0: Uint8Array,
+        message1: Uint8Array,
+    }) {
+        this.#privateKey = config.privateKey || secp256k1.utils.randomPrivateKey();
+        this.#message0 = config.message0;
+        this.#message1 = config.message1;
     }
 
     publicKey(): Uint8Array {
@@ -52,9 +56,12 @@ export class OTReceiver {
     #message: Uint8Array | null;
     
 
-    constructor(privateKey: Uint8Array | null, choiceBit: boolean) {
-        this.#choiceBit = choiceBit
-        this.#privateKey = privateKey || secp256k1.utils.randomPrivateKey();
+    constructor(config: {
+        privateKey: Uint8Array | undefined,
+        choiceBit: boolean
+    }) {
+        this.#choiceBit = config.choiceBit
+        this.#privateKey = config.privateKey || secp256k1.utils.randomPrivateKey();
         this.#key = null;
         this.#message = null;
     }
@@ -99,6 +106,16 @@ export class OTReceiver {
             throw new Error("no message received yet")
         }
     }
+}
+
+/**
+ * Runs Simplest OT between a sender and a receiver
+ */
+export function runObliviousTransfer(s: OTSender, r: OTReceiver) {
+    const S = s.publicKey();
+    const R = r.publicKey(S);
+    const encryptedMessages = s.encryptMessages(R);
+    r.decrypt(encryptedMessages);
 }
 
 /**
