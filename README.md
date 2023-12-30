@@ -158,9 +158,9 @@ The idea behind it: a Diffie-Hellman-like exchange to construct two encryption k
   * $k_1 = H(a(B-A))$  
     (note that $k_1=H(a(A+bG-A))=H(abG)=H(bA)=k_b$ when $c=1$)
 * Alice encrypts her messages under these two keys:
-  * $e_0 = encrypt(M_0, k_0)$  
+  * $e_0 = encrypt(M_0, k_0)$
     (note that this can be decrypted by Bob when $c=0$)
-  * $e_1 = encrypt(M_0, k_1)$  
+  * $e_1 = encrypt(M_1, k_1)$
     (note that this can be decrypted by Bob when $c=1$)
 * Bob decrypts based on his choice bit:
    * if $c=0$, Bob receives $decrypt(e_0, k_b) = M_0$
